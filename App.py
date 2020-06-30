@@ -2,7 +2,8 @@ from bottle import route, run, HTTPResponse, request
 from OutputFlow.SingleSurprise import SingleSurprise
 from Stats import Stats
 from SetUp import *
-# --------------------- Macors-----------------------------------
+
+# --------------------- Macros-----------------------------------
 PORT = 3000
 HOST = "localhost"
 INVALID_INPUT = "INVALID_INPUT"
@@ -20,6 +21,7 @@ def surprise():
     and return a response depend on the input
     :return: json frame directly to the web
     """
+    # print(dict(request.query.decode()))
     single = SingleSurprise(dict(request.forms),
                             dict(request.query.decode())).flow()
     # Invalid Input

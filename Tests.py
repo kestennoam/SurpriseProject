@@ -1,8 +1,15 @@
 import string
 from ValidationInput import ValidationInput
+from OutputFlow.ChooseSurprise import ChooseSurprise
 import random
+import datetime
 
+CURRENT_YEAR = datetime.datetime.today().year
 DEFAULT_ITERATIONS = 100
+NO_EXIST_TYPE = -1
+TYPE_CHUCK_NORRIS = 1
+TYPE_KANYE_WEST = 2
+TYPE_NUM_SUM = 3
 
 
 def random_string(string_length=8):
@@ -12,6 +19,10 @@ def random_string(string_length=8):
 
 # --------------------_Unit Tests------------------------------
 class ValidationInputTest():
+
+    def __init__(self):
+        self.run_validationInput()
+
     def run_validationInput(self):
         self.test_num_of_params_valid()
         self.test_num_of_params_invalid()
@@ -81,21 +92,39 @@ class ValidationInputTest():
 
         negative_year = {'name': "test", 'birth_year': '-4'}
         in2 = ValidationInput(negative_year)
-        assert not in2.validate_birth_year(), "Year Not in range 0- 2020"
+        assert not in2.validate_birth_year(), \
+            f"Year Not in range 0- {CURRENT_YEAR}"
 
         not_numeric = {'name': "test", 'birth_year': 'aa'}
         in3 = ValidationInput(not_numeric)
-        assert not in3.validate_birth_year(), "Year Must be an integer 0-2020"
+        assert not in3.validate_birth_year(), \
+            f"Year Must be an integer 0-{CURRENT_YEAR}"
         print("TEST PASSED- birth_year invalid")
 
     def test_birth_year_valid(self):
         for i in range(DEFAULT_ITERATIONS):
-            year = str(random.randrange(0, 2020))
+            year = str(random.randrange(0, CURRENT_YEAR + 1))
             not_in_range = {'name': "test", 'birth_year': year}
             in1 = ValidationInput(not_in_range)
-            assert in1.validate_birth_year(), "Year in range 0-2020 is valid"
+            assert in1.validate_birth_year(),\
+                F"Year in range 0-{CURRENT_YEAR} is valid"
         print("TEST PASSED- birth_year valid")
 
 
+class ChooseSurpriseTest():
+    def __init__(self):
+        self.run_tests()
+
+    def run_tests(self):
+        self.tests_chuck_norris()
+
+    def tests_chuck_norris(self):
+        for i in range(DEFAULT_ITERATIONS):
+            inp = [random_string(5), random.randrange(1, 1999)]
+            print(inp)
+            assert ChooseSurprise(
+                inp) == TYPE_CHUCK_NORRIS, "Should be Chuck Norris"
+
+
 validation_input = ValidationInputTest()
-validation_input.run_validationInput()
+ChooseSurpriseTest()

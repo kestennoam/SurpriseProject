@@ -1,3 +1,6 @@
+import datetime
+
+
 class ValidationInput:
     """
     This class is responsible on the validation of the input that we get
@@ -5,8 +8,9 @@ class ValidationInput:
     we get it as dict and need to check every relevant param of it.
     Must note that at this moment we accept more fields than num_of_params
     """
+    CURRENT_YEAR = datetime.datetime.today().year
     NUM_OF_PARAMS = 2
-    RANGE_YEARS = range(0, 2021)
+    RANGE_YEARS = range(0, CURRENT_YEAR + 1)
 
     def __init__(self, dict_params):
         self.__dict_params = dict_params

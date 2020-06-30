@@ -8,7 +8,8 @@ class NumSum(SurpriseFrame):
     it heritage from surprise most of attributes.
     work standalone
     """
-    DIFF = 64  # @ ascii val (last before A)
+    DIFF_UPPER = 64  # @ ascii val (last before A)
+    DIFF_LOWER = 96  # ` ascii val (last before A)
     SPACE = " "
     TYPE = "name-sum"
 
@@ -23,7 +24,12 @@ class NumSum(SurpriseFrame):
         :return: total- sum of the char values
         """
         total = 0
-        for i in self.get_val(0).upper():  # make upper to ensure no lower
-            if i != self.SPACE:  # check if its space to avoid calculate it
-                total += (ord(i) - self.DIFF)
+        for ch in self.get_val(0):  # make upper to ensure no lower
+            ascii_ch = ord(ch)
+            if ch != self.SPACE:  # check if its space to avoid calculate it
+                if ascii_ch < self.DIFF_LOWER:
+                    total += ascii_ch - self.DIFF_UPPER
+                else:
+                    total += ascii_ch - self.DIFF_LOWER
+
         return total
