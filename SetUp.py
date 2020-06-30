@@ -2,7 +2,7 @@ import subprocess
 
 
 class SetUp:
-    PACKAGES = ['bottle', 'requests', 'json','panda']
+    PACKAGES = ['bottle', 'requests', 'json']
 
     def __init__(self):
         for package in self.PACKAGES:
