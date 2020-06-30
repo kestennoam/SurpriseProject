@@ -2,7 +2,6 @@ from bottle import route, run, HTTPResponse, request
 from OutputFlow.SingleSurprise import SingleSurprise
 from Stats import Stats
 from SetUp import *
-
 # --------------------- Macors-----------------------------------
 PORT = 3000
 HOST = "localhost"
@@ -25,6 +24,7 @@ def surprise():
                             dict(request.query.decode())).flow()
     # Invalid Input
     if single == INVALID_INPUT:
+        print("fff")
         return HTTPResponse(status=400)
     # Invalid type
     elif single == NO_EXIST_TYPE:
