@@ -20,3 +20,4 @@ class SetUp:
             importlib.import_module(package)
         except ImportError:
             subprocess.call(['pip3', 'install', package])
+wsdads
