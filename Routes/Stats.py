@@ -8,6 +8,7 @@ class Stats:
     to each one of the surprises
     """
     REQUESTS = "requests"
+    BAD_REQUESTS = "bad requests"
     REQUESTS_STATS = "requests_stats"
     TYPE_TITLE = "type"
     COUNT = "count"
@@ -15,8 +16,9 @@ class Stats:
     DEFAULT_VALUE = 0
 
     def __init__(self):
-        self.__requests = self.DEFAULT_VALUE
+        self.__valid_requests = self.DEFAULT_VALUE
         self.__requests_stats = self.DEFAULT_VALUE
+        self.__bad_requests = 0
         self.__dict_stats = \
             {
                 "chuck-norris-joke": self.DEFAULT_VALUE,
@@ -36,7 +38,7 @@ class Stats:
         if type_of_surprise not in self.__dict_stats:
             return
         self.__dict_stats[type_of_surprise] += 1
-        self.__requests += 1
+        self.__valid_requests += 1
 
     def make_distribution(self):
         """
@@ -55,6 +57,13 @@ class Stats:
             distribution.append(data_frame)
         return distribution
 
+    def increase_bad_requests(self):
+        """
+        This method increase counter of bad requests
+        :return:
+        """
+        self.__bad_requests += 1
+
     def response_stats(self):
         """
         This method build the full packet that will be responded to the web
@@ -64,7 +73,8 @@ class Stats:
         self.__requests_stats += 1
         distribution = self.make_distribution()
         data_frame = {self.REQUESTS_STATS: self.__requests_stats,
-                      self.REQUESTS: self.__requests,
+                      self.REQUESTS: self.__valid_requests,
+                      self.BAD_REQUESTS: self.__bad_requests,
                       self.DISTRIBUTION: distribution}
         json_dump = json.dumps(data_frame)
         return json_dump

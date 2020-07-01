@@ -1,6 +1,6 @@
 import string
 from ValidationInput import ValidationInput
-from Surprise.ChooseSurprise import ChooseSurprise
+from Routes.Surprise.ChooseSurprise import ChooseSurprise
 import random
 import datetime
 
@@ -17,18 +17,30 @@ KANYE_WEST_FIRST_CH = "aAzZ"
 
 
 def random_string():
+    """
+    This method randomize string in len 1-20 with upper and lower letters.
+    :return:
+    """
     range_random = random.randrange(1, 20)
     letters = string.ascii_letters
     return ''.join(random.choice(letters) for i in range(range_random))
 
 
 # --------------------_Unit Tests------------------------------
-class TestValidationInput():
+class TestValidationInput:
+    """
+    This class test the validation input.
+    it check a lot of sanity and edge cases of each function.
+    """
 
     def __init__(self):
         self.run_validation_input()
 
     def run_validation_input(self):
+        """
+        this method run all the tests of the class
+        :return:
+        """
         self.test_num_of_params_valid()
         self.test_num_of_params_invalid()
         self.test_username_invalid()
@@ -38,6 +50,14 @@ class TestValidationInput():
 
     @staticmethod
     def test_num_of_params_invalid():
+        """
+        This method check the num of params edge cases.
+        1)empty name
+        2) zero params
+        3) one param
+        4) invalid types in the dict
+        :return:
+        """
         one_param = {'name': ""}
         in1 = ValidationInput(one_param)
         assert not in1.validate_num_of_params(), "Should be 2 params"
@@ -54,6 +74,10 @@ class TestValidationInput():
 
     @staticmethod
     def test_num_of_params_valid():
+        """
+        check default iterations num of valid params
+        :return:
+        """
         for i in range(DEFAULT_ITERATIONS):
             valid_dict = {}
             for i in range(random.randrange(2, 50)):
@@ -64,6 +88,14 @@ class TestValidationInput():
 
     @staticmethod
     def test_username_invalid():
+        """
+        This method check specifcily the username validation function
+        1) rmpty name
+        2) double spaces
+        3) numeric char in the name
+        4) special char in the name
+        :return:
+        """
         empty_name = {'name': "", 'birth_year': '2000'}
         in1 = ValidationInput(empty_name)
         assert not in1.validate_username(), "empty name is an Error"
@@ -84,6 +116,10 @@ class TestValidationInput():
 
     @staticmethod
     def test_username_valid():
+        """
+        This method check sanity checks of the username
+        :return:
+        """
         one_space = {'name': "John Smith", 'birth_year': '2000'}
         in1 = ValidationInput(one_space)
         assert in1.validate_username(), "Space is valid"
@@ -96,6 +132,14 @@ class TestValidationInput():
 
     @staticmethod
     def test_birth_year_invalid():
+        """
+        This method check invalid edge cases of birth year
+        1) not in the range of years
+        2) negative year
+        3) float year
+        4) not numeric
+        :return:
+        """
         not_in_range = {'name': "test", 'birth_year': '2030'}
         in1 = ValidationInput(not_in_range)
         assert not in1.validate_birth_year(), "Year Not in range 0- 2020"
@@ -105,14 +149,23 @@ class TestValidationInput():
         assert not in2.validate_birth_year(), \
             f"Year Not in range 0- {CURRENT_YEAR}"
 
-        not_numeric = {'name': "test", 'birth_year': 'aa'}
-        in3 = ValidationInput(not_numeric)
+        float_year = {'name': "test", 'birth_year': '2000.2'}
+        in3 = ValidationInput(float_year)
         assert not in3.validate_birth_year(), \
+            f"Year Not in range 0- {CURRENT_YEAR}"
+
+        not_numeric = {'name': "test", 'birth_year': 'aa'}
+        in4 = ValidationInput(not_numeric)
+        assert not in4.validate_birth_year(), \
             f"Year Must be an integer 0-{CURRENT_YEAR}"
         print("TEST PASSED- birth_year invalid")
 
     @staticmethod
     def test_birth_year_valid():
+        """
+        This method check sanity checks of valid randomized years
+        :return:
+        """
         for i in range(DEFAULT_ITERATIONS):
             year = str(random.randrange(0, CURRENT_YEAR + 1))
             not_in_range = {'name': "test", 'birth_year': year}
@@ -122,11 +175,20 @@ class TestValidationInput():
         print("TEST PASSED- birth_year valid")
 
 
-class TestChooseSurprise():
+class TestChooseSurprise:
+    """
+    This class test all the ChooseSurprise functions by unit tests
+    of every possible option
+    """
+
     def __init__(self):
         self.run_tests()
 
     def run_tests(self):
+        """
+        This method run all the tests
+        :return:
+        """
         self.test_chuck_norris()
         self.test_kanye_west()
         self.test_num_sum()
@@ -134,6 +196,11 @@ class TestChooseSurprise():
 
     @staticmethod
     def test_chuck_norris():
+        """
+        This method check randomized years and names
+         that the result should be chuck norris
+        :return:
+        """
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
             birth_year = random.randrange(1, BIRTH_YEAR_DEFAULT)
@@ -143,6 +210,11 @@ class TestChooseSurprise():
 
     @staticmethod
     def test_kanye_west():
+        """
+        This method check randomized years and names
+         that the result should be kanye west
+        :return:
+        """
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
             if username[0] in KANYE_WEST_FIRST_CH:
@@ -155,6 +227,11 @@ class TestChooseSurprise():
 
     @staticmethod
     def test_num_sum():
+        """
+        This method check randomized years and names
+         that the result should be nun_sum
+        :return:
+        """
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
             birth_year = random.randrange(BIRTH_YEAR_DEFAULT + 1,
@@ -169,12 +246,18 @@ class TestChooseSurprise():
 
     @staticmethod
     def test_animals_surprise():
+        """
+        This method check randomized years and names
+         that the result should be animals
+        :return:
+        """
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
             assert ChooseSurprise(username, BIRTH_YEAR_DEFAULT).choose_type() \
                    == TYPE_ANIMALS, "Should be Animals type"
 
 
-validation_input = TestValidationInput()
-TestChooseSurprise()
-print("ALL TESTS PASSED")
+if __name__ == '__main__':
+    validation_input = TestValidationInput()
+    TestChooseSurprise()
+    print("ALL TESTS PASSED")

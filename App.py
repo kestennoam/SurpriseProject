@@ -1,7 +1,7 @@
 from bottle import route, run, request
-from Surprise.SingleSurprise import SingleSurprise
-from Stats import Stats
-from Demographics import Demographics
+from Routes.Surprise.SingleSurprise import SingleSurprise
+from Routes.Stats import Stats
+from Routes.Demographics import Demographics
 
 # --------------------- Macros-----------------------------------
 PORT = 3000
@@ -25,6 +25,7 @@ def surprise():
     dict_queries = dict(request.query.decode())
     res = SingleSurprise(dict(request.forms), dict_queries).flow()
     if not res[1]:  # check if the input is invalid
+        stats.increase_bad_requests()
         return res[0]
 
     # valid

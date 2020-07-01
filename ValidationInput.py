@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 
 
@@ -46,11 +47,13 @@ class ValidationInput:
         1) if the 'name' field is a key in the dictionary
         2) if all the chars are alphabetic or one space
         3) if username is empty - False
+        4) is it in english or not
         :return: True/False
         """
         if 'name' not in self.__dict_params: return False
         num_of_spaces = 0
         for ch in self.__dict_params['name']:
+            if not self.is_english_char(ch): return False  # check english
             if ch.isalpha():
                 continue
             elif ch.isspace() and num_of_spaces < 1:
@@ -59,3 +62,17 @@ class ValidationInput:
                 return False
         if len(self.__dict_params['name']) == 0: return False
         return True
+
+    @staticmethod
+    def is_english_char(username):
+        """
+        This method check if the input is in english or not
+        :param username:
+        :return:
+        """
+        try:
+            username.encode(encoding='utf-8').decode('ascii')
+        except UnicodeDecodeError:
+            return False
+        else:
+            return True

@@ -1,10 +1,10 @@
-from Surprise.ChooseSurprise import ChooseSurprise
-from Surprise.Surprises.ChuckNorris import ChuckNorris
-from Surprise.Surprises.KanyeWest import KanyeWest
-from Surprise.Surprises.NumSum import NumSum
+from Routes.Surprise.ChooseSurprise import ChooseSurprise
+from Routes.Surprise.Surprises.ChuckNorris import ChuckNorris
+from Routes.Surprise.Surprises.KanyeWest import KanyeWest
+from Routes.Surprise.Surprises.NumSum import NumSum
 from ValidationInput import ValidationInput
 import bottle
-from Surprise.Surprises.Animals import Animals
+from Routes.Surprise.Surprises.Animals import Animals
 
 
 class SingleSurprise:

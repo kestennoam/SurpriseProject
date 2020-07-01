@@ -1,5 +1,5 @@
-from Surprise.Surprises.ExternalAPI import ExternalAPI
-from Surprise.Surprises.SurpriseFrame import SurpriseFrame
+from ExternalAPI import ExternalAPI
+from Routes.Surprise.Surprises.SurpriseFrame import SurpriseFrame
 
 
 class KanyeWest(SurpriseFrame):

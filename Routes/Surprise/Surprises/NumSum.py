@@ -1,4 +1,4 @@
-from Surprise.Surprises.SurpriseFrame import SurpriseFrame
+from Routes.Surprise.Surprises.SurpriseFrame import SurpriseFrame
 
 
 class NumSum(SurpriseFrame):
