@@ -8,6 +8,7 @@ class Stats:
     to each one of the surprises
     """
     REQUESTS = "requests"
+    REQUESTS_STATS = "requests_stats"
     TYPE_TITLE = "type"
     COUNT = "count"
     DISTRIBUTION = "distribution"
@@ -15,6 +16,7 @@ class Stats:
 
     def __init__(self):
         self.__requests = self.DEFAULT_VALUE
+        self.__requests_stats = self.DEFAULT_VALUE
         self.__dict_stats = \
             {
                 "chuck-norris-joke": self.DEFAULT_VALUE,
@@ -59,9 +61,10 @@ class Stats:
         first it call make distribution and than make thew big frame
         :return: json frame
         """
-
+        self.__requests_stats += 1
         distribution = self.make_distribution()
-        data_frame = {self.REQUESTS: self.__requests,
+        data_frame = {self.REQUESTS_STATS: self.__requests_stats,
+                      self.REQUESTS: self.__requests,
                       self.DISTRIBUTION: distribution}
         json_dump = json.dumps(data_frame)
         return json_dump

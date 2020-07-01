@@ -25,7 +25,7 @@ def surprise():
 
     single = SingleSurprise(dict(request.forms),
                             dict(request.query.decode())).flow()
-    if not single[1]:
+    if not single[1]:  # check if the input is invalid
         return single[0]
 
     # valid

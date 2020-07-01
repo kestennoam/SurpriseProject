@@ -28,9 +28,9 @@ class SingleSurprise:
             TYPE_ANIMALS: Animals
         }
 
-    def __init__(self, dict_forms, dict_query):
+    def __init__(self, *args):
         self.__payload = {}
-        self.read_query_params(dict_forms, dict_query)
+        self.read_query_params(*args)
         self.__username = ""
         self.__birth_year = 0
 

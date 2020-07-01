@@ -5,7 +5,7 @@ import random
 import datetime
 
 CURRENT_YEAR = datetime.datetime.today().year
-DEFAULT_ITERATIONS = 100
+DEFAULT_ITERATIONS = 1000
 NO_EXIST_TYPE = -1
 TYPE_CHUCK_NORRIS = 1
 TYPE_KANYE_WEST = 2
@@ -23,7 +23,7 @@ def random_string():
 
 
 # --------------------_Unit Tests------------------------------
-class ValidationInputTest():
+class TestValidationInput():
 
     def __init__(self):
         self.run_validationInput()
@@ -36,7 +36,8 @@ class ValidationInputTest():
         self.test_birth_year_invalid()
         self.test_birth_year_valid()
 
-    def test_num_of_params_invalid(self):
+    @staticmethod
+    def test_num_of_params_invalid():
         one_param = {'name': ""}
         in1 = ValidationInput(one_param)
         assert not in1.validate_num_of_params(), "Should be 2 params"
@@ -51,7 +52,8 @@ class ValidationInputTest():
             assert not in3.validate_num_of_params(), "Should be dictionary"
         print("TEST PASSED- num of params Invalid")
 
-    def test_num_of_params_valid(self):
+    @staticmethod
+    def test_num_of_params_valid():
         for i in range(DEFAULT_ITERATIONS):
             valid_dict = {}
             for i in range(random.randrange(2, 50)):
@@ -60,7 +62,8 @@ class ValidationInputTest():
             assert in1.validate_num_of_params(), "Should be dictionary"
         print("TEST PASSED- num of params Valid")
 
-    def test_username_invalid(self):
+    @staticmethod
+    def test_username_invalid():
         empty_name = {'name': "", 'birth_year': '2000'}
         in1 = ValidationInput(empty_name)
         assert not in1.validate_username(), "empty name is an Error"
@@ -79,7 +82,8 @@ class ValidationInputTest():
 
         print("TEST PASSED- username Invalid")
 
-    def test_username_valid(self):
+    @staticmethod
+    def test_username_valid():
         one_space = {'name': "John Smith", 'birth_year': '2000'}
         in1 = ValidationInput(one_space)
         assert in1.validate_username(), "Space is valid"
@@ -90,7 +94,8 @@ class ValidationInputTest():
             assert in2.validate_username(), "Valid Input"
         print("TEST PASSED- username valid")
 
-    def test_birth_year_invalid(self):
+    @staticmethod
+    def test_birth_year_invalid():
         not_in_range = {'name': "test", 'birth_year': '2030'}
         in1 = ValidationInput(not_in_range)
         assert not in1.validate_birth_year(), "Year Not in range 0- 2020"
@@ -106,7 +111,8 @@ class ValidationInputTest():
             f"Year Must be an integer 0-{CURRENT_YEAR}"
         print("TEST PASSED- birth_year invalid")
 
-    def test_birth_year_valid(self):
+    @staticmethod
+    def test_birth_year_valid():
         for i in range(DEFAULT_ITERATIONS):
             year = str(random.randrange(0, CURRENT_YEAR + 1))
             not_in_range = {'name': "test", 'birth_year': year}
@@ -116,7 +122,7 @@ class ValidationInputTest():
         print("TEST PASSED- birth_year valid")
 
 
-class ChooseSurpriseTest():
+class TestChooseSurprise():
     def __init__(self):
         self.run_tests()
 
@@ -126,7 +132,8 @@ class ChooseSurpriseTest():
         self.test_num_sum()
         self.test_animals_surprise()
 
-    def test_chuck_norris(self):
+    @staticmethod
+    def test_chuck_norris():
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
             birth_year = random.randrange(1, BIRTH_YEAR_DEFAULT)
@@ -134,7 +141,8 @@ class ChooseSurpriseTest():
                    == TYPE_CHUCK_NORRIS, "Should be Chuck Norris"
         print("TEST PASSED- Chuck Norris Valid")
 
-    def test_kanye_west(self):
+    @staticmethod
+    def test_kanye_west():
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
             if username[0] in KANYE_WEST_FIRST_CH:
@@ -145,7 +153,8 @@ class ChooseSurpriseTest():
                    == TYPE_KANYE_WEST, "Should be Kanye West"
         print("TEST PASSED- Kanye West Valid")
 
-    def test_num_sum(self):
+    @staticmethod
+    def test_num_sum():
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
             birth_year = random.randrange(BIRTH_YEAR_DEFAULT + 1,
@@ -158,21 +167,14 @@ class ChooseSurpriseTest():
                 assert res == TYPE_NUM_SUM, "Should be num-sum"
         print("TEST PASSED- num-sum Valid")
 
-    def test_animals_surprise(self):
+    @staticmethod
+    def test_animals_surprise():
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
-            res = ChooseSurprise(username,
-                                  BIRTH_YEAR_DEFAULT).choose_type()
-            print(res, username,)
-            assert  res\
+            assert ChooseSurprise(username, BIRTH_YEAR_DEFAULT).choose_type() \
                    == TYPE_ANIMALS, "Should be Animals type"
 
-    print("TEST PASSED- Animals Valid")
 
-
-# class SingleSurpriseTest():
-#     def run_tests(self):
-
-
-validation_input = ValidationInputTest()
-ChooseSurpriseTest()
+validation_input = TestValidationInput()
+TestChooseSurprise()
+print("ALL TESTS PASSED")
