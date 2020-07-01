@@ -19,86 +19,71 @@ it is associated with:
 ### Prerequisites
 
 1)Python3 
-2) Python Modules-  
-              bottle
-              requests
-              json
-              datetime
-              numpy
+2) Python Modules
 3) Internet Connection
           
 
 ### Installing
 
-Installing python
+Installing python3
 
 ```
 Open Terminal
 brew install python3 //OSX
 python-3.8.0.exe InstallAllUsers=0 Include_launcher=0 Include_test=0
     SimpleInstall=1 SimpleInstallDescription="Just for me, no test suite." //Windows
-get-install python3
+get-install python3 //linux
 ```
 
-And repeat
+Installing Python packages-
 
 ```
-until finished
+Open Terminal
+Navigate to the directory of SurpriseMe Projet-
+~cd <path to the project directory>
+Run SetUp.py (will install all the relevant modules)
+python3 SetUp.py
+
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+
 
 ## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+```
+Open Terminal
+Navigate to the directory of SurpriseMe Projet
+   ~cd <path to the project directory>
+Run pytest 
+   ~pytest Tests.py
 
 ```
-Give an example
-```
 
-### And coding style tests
-
-Explain what these tests test and why
+## Running 
 
 ```
-Give an example
+Open Terminal
+Navigate to the directory of SurpriseMe Projet
+   ~cd <path to the project directory>
+Run App.py 
+   python3 App.py
+Browse to the server
+   http://localhost:3000/api/<one of the following options>
+      /api/surprise?name=<first name>%<last name>&birth_year=<year>
+      /stats
+      /demographics
+repeat it
+when you want to stop- ctrl+c 
 ```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Noam Kesten** - *Interview work* - [kestennoam](https://github.com/kestennoam)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is not licensed
 
-## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
