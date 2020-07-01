@@ -60,7 +60,7 @@ Run pytest
 
 ```
 
-## Running 
+## Running Program
 
 ```
 Open Terminal
@@ -75,6 +75,13 @@ Browse to the server
       /demographics
 repeat it
 when you want to stop- ctrl+c 
+```
+Example of inputs:\
+```
+ChuckNorris- http://localhost:3000/api/surprise?name=ayan%20Gosling&birth_year=1980  (0<birth_year<2000)
+Kanye West - http://localhost:3000/api/surprise?name=ryan%20Gosling&birth_year=2003  (birth_year>2000 and not start with 'aAzZ')
+Name-sum- http://localhost:3000/api/surprise?name=ayan%20Gosling&birth_year=2003     (birth_year>2000 and username starts with one of 'aAzZ')
+Animals- http://localhost:3000/api/surprise?name=Ryan%20Gosling&birth_year=2000      (birth_year= 2000)
 ```
 
 ## Integrate new Route
