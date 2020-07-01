@@ -86,14 +86,17 @@ In case of updating that require new route- you need to integrate the next follo
 
 ## Integrate new Surprise
 In case of updating that require new surprise- you need to integrate the next following steps:\
-``` Create the Surprise in a new module \
-    Add to ChooseSurprise- Function that check all the condtions that are required to choose this surprise\
+``` Create the Surprise in a new module 
+    Add to ChooseSurprise- Function that check all the condtions that are required to choose this surprise
     Add to SingleSurprise- 
       1) import new surprise 
-      2) add class instance to DICT_SURPRISES\
-    Add to Stats module to self.__dict.stats this class object and the type is needed\
-    Add Your own tests to tests.py file\
-    Add new modules if are needed to SetUp.py```
+      2) add class instance to DICT_SURPRISES
+    Add to Stats module to self.__dict.stats this class object and the type is needed
+    Add Your own tests to tests.py file
+    Add new modules if are needed to SetUp.py
+```
+
+
 
 
 
