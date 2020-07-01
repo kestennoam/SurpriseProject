@@ -77,6 +77,21 @@ repeat it
 when you want to stop- ctrl+c 
 ```
 
+## Adding new Route
+In case of updating that require new route- you need to to the next following steps:
+``` Create the Route Logic in a new module ```
+``` Add to App.py- import the <new route module> and build function that call this class ```
+``` Add Your own tests to tests.py file```
+``` Add new modules if are needed to SetUp.py```
+
+## Adding new Surprise
+In case of updating that require new route- you need to to the next following steps:
+``` Create the Route Logic in a new module ```
+``` Add to App.py- import the <new route module> and build function that call this class ```
+``` Add Your own tests to tests.py file```
+``` Add new modules if are needed to SetUp.py```
+
+
 
 ## Authors
 
