@@ -1,10 +1,10 @@
-from OutputFlow.ChooseSurprise import ChooseSurprise
-from OutputFlow.Surprises.ChuckNorris import ChuckNorris
-from OutputFlow.Surprises.KanyeWest import KanyeWest
-from OutputFlow.Surprises.NumSum import NumSum
+from Surprise.ChooseSurprise import ChooseSurprise
+from Surprise.Surprises.ChuckNorris import ChuckNorris
+from Surprise.Surprises.KanyeWest import KanyeWest
+from Surprise.Surprises.NumSum import NumSum
 from ValidationInput import ValidationInput
 import bottle
-from OutputFlow.Surprises.Animals import Animals
+from Surprise.Surprises.Animals import Animals
 
 
 class SingleSurprise:

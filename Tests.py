@@ -1,6 +1,6 @@
 import string
 from ValidationInput import ValidationInput
-from OutputFlow.ChooseSurprise import ChooseSurprise
+from Surprise.ChooseSurprise import ChooseSurprise
 import random
 import datetime
 

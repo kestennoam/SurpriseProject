@@ -29,6 +29,7 @@ class Demographics:
             'P70': 0,
             'P50': 0,
             'P25': 0}
+        
 
     def update_stats(self, dic):
         print(dic)

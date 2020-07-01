@@ -1,5 +1,5 @@
-from OutputFlow.Surprises.ExternalAPI import ExternalAPI
-from OutputFlow.Surprises.SurpriseFrame import SurpriseFrame
+from Surprise.Surprises.ExternalAPI import ExternalAPI
+from Surprise.Surprises.SurpriseFrame import SurpriseFrame
 
 
 class ChuckNorris(SurpriseFrame):

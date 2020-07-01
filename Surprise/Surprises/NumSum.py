@@ -1,4 +1,4 @@
-from OutputFlow.Surprises.SurpriseFrame import SurpriseFrame
+from Surprise.Surprises.SurpriseFrame import SurpriseFrame
 
 
 class NumSum(SurpriseFrame):

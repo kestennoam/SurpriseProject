@@ -1,5 +1,5 @@
 from bottle import route, run, request
-from OutputFlow.SingleSurprise import SingleSurprise
+from Surprise.SingleSurprise import SingleSurprise
 from Stats import Stats
 from Demographics import Demographics
 
