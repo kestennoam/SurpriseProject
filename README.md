@@ -21,9 +21,9 @@ it is associated with:
 
 ### Prerequisites
 
-   1)Python3 \
-   2) Python Modules \
-   3) Internet Connection
+   1)  Python3 \
+   2)  Python Modules \
+   3)  Internet Connection
           
 
 ### Installing
@@ -78,22 +78,22 @@ when you want to stop- ctrl+c
 ```
 
 ## Integrate new Route
-In case of updating that require new route- you need to integrate the next following steps:
+In case of updating that require new route- you need to integrate the next following steps:\
 ``` Create the Route logic in a new module ``` \
 ``` Add to App.py- import the <new route module> and build function that call this class ``` \
 ``` Add Your own tests to tests.py file``` \
 ``` Add new modules if are needed to SetUp.py``` \
 
 ## Integrate new Surprise
-In case of updating that require new surprise- you need to integrate the next following steps:
-``` Create the Surprise in a new module ```\ 
+In case of updating that require new surprise- you need to integrate the next following steps:\
+``` Create the Surprise in a new module ```\
 ``` Add to ChooseSurprise- Function that check all the condtions that are required to choose this surprise ```\
 ``` Add to SingleSurprise- 
          \t\t 1) import new surprise 
-         \t\t 2) add class instance to DICT_SURPRISES
+         \t\t 2) add class instance to DICT_SURPRISES ```\
 ``` Add to Stats module to self.__dict.stats this class object and the type is needed```\
 ``` Add Your own tests to tests.py file```\
-``` Add new modules if are needed to SetUp.py```\
+``` Add new modules if are needed to SetUp.py```
 
 
 
