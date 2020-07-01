@@ -26,7 +26,7 @@ class SurpriseFrame:
 
     def set_fields(self, *args):
         """
-        this method is respobsible on defining all fields that were passed
+        this method is responsible on defining all fields that were passed
         to fields of the surprise instance
         :param args: username[0], birth_year[1]. etc...
         :return: None

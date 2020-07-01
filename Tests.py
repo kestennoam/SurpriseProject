@@ -10,11 +10,16 @@ NO_EXIST_TYPE = -1
 TYPE_CHUCK_NORRIS = 1
 TYPE_KANYE_WEST = 2
 TYPE_NUM_SUM = 3
+TYPE_ANIMALS = 4
+BIRTH_YEAR_DEFAULT = 2000
+NAME_SUM_FIRST_CH = 'qQ'
+KANYE_WEST_FIRST_CH = "aAzZ"
 
 
-def random_string(string_length=8):
+def random_string():
+    range_random = random.randrange(1, 20)
     letters = string.ascii_letters
-    return ''.join(random.choice(letters) for i in range(string_length))
+    return ''.join(random.choice(letters) for i in range(range_random))
 
 
 # --------------------_Unit Tests------------------------------
@@ -79,7 +84,7 @@ class ValidationInputTest():
         in1 = ValidationInput(one_space)
         assert in1.validate_username(), "Space is valid"
         for i in range(DEFAULT_ITERATIONS):
-            valid_string = random_string(random.randrange(1, 100))
+            valid_string = random_string()
             valid_dic = {'name': valid_string, 'birth_year': '2000'}
             in2 = ValidationInput(valid_dic)
             assert in2.validate_username(), "Valid Input"
@@ -106,7 +111,7 @@ class ValidationInputTest():
             year = str(random.randrange(0, CURRENT_YEAR + 1))
             not_in_range = {'name': "test", 'birth_year': year}
             in1 = ValidationInput(not_in_range)
-            assert in1.validate_birth_year(),\
+            assert in1.validate_birth_year(), \
                 F"Year in range 0-{CURRENT_YEAR} is valid"
         print("TEST PASSED- birth_year valid")
 
@@ -116,14 +121,57 @@ class ChooseSurpriseTest():
         self.run_tests()
 
     def run_tests(self):
-        self.tests_chuck_norris()
+        self.test_chuck_norris()
+        self.test_kanye_west()
+        self.test_num_sum()
+        self.test_animals_surprise()
 
-    def tests_chuck_norris(self):
+    def test_chuck_norris(self):
         for i in range(DEFAULT_ITERATIONS):
-            inp = [random_string(5), random.randrange(1, 1999)]
-            print(inp)
-            assert ChooseSurprise(
-                inp) == TYPE_CHUCK_NORRIS, "Should be Chuck Norris"
+            username = random_string()
+            birth_year = random.randrange(1, BIRTH_YEAR_DEFAULT)
+            assert ChooseSurprise(username, birth_year).choose_type() \
+                   == TYPE_CHUCK_NORRIS, "Should be Chuck Norris"
+        print("TEST PASSED- Chuck Norris Valid")
+
+    def test_kanye_west(self):
+        for i in range(DEFAULT_ITERATIONS):
+            username = random_string()
+            if username[0] in KANYE_WEST_FIRST_CH:
+                username = 'h' + username
+            birth_year = random.randrange(BIRTH_YEAR_DEFAULT + 1,
+                                          CURRENT_YEAR + 1)
+            assert ChooseSurprise(username, birth_year).choose_type() \
+                   == TYPE_KANYE_WEST, "Should be Kanye West"
+        print("TEST PASSED- Kanye West Valid")
+
+    def test_num_sum(self):
+        for i in range(DEFAULT_ITERATIONS):
+            username = random_string()
+            birth_year = random.randrange(BIRTH_YEAR_DEFAULT + 1,
+                                          CURRENT_YEAR + 1)
+            res = ChooseSurprise(username, birth_year).choose_type()
+            if username[0] in NAME_SUM_FIRST_CH or \
+                    username[0] not in KANYE_WEST_FIRST_CH:
+                assert res != TYPE_NUM_SUM, "Should not be num-sum"
+            else:
+                assert res == TYPE_NUM_SUM, "Should be num-sum"
+        print("TEST PASSED- num-sum Valid")
+
+    def test_animals_surprise(self):
+        for i in range(DEFAULT_ITERATIONS):
+            username = random_string()
+            res = ChooseSurprise(username,
+                                  BIRTH_YEAR_DEFAULT).choose_type()
+            print(res, username,)
+            assert  res\
+                   == TYPE_ANIMALS, "Should be Animals type"
+
+    print("TEST PASSED- Animals Valid")
+
+
+# class SingleSurpriseTest():
+#     def run_tests(self):
 
 
 validation_input = ValidationInputTest()

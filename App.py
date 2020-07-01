@@ -10,6 +10,7 @@ INVALID_INPUT = "INVALID_INPUT"
 NO_SURPRISE = "No surprise for you!"
 NO_EXIST_TYPE = -1
 INVALID_INPUT = -2
+ERROR_CONNECTION = -3
 
 
 # --------------------- Routes Functions------------------------
@@ -21,16 +22,12 @@ def surprise():
     and return a response depend on the input
     :return: json frame directly to the web
     """
-    # print(dict(request.query.decode()))
+
     single = SingleSurprise(dict(request.forms),
                             dict(request.query.decode())).flow()
-    # Invalid Input
-    if single == INVALID_INPUT:
-        print("fff")
-        return HTTPResponse(status=400)
-    # Invalid type
-    elif single == NO_EXIST_TYPE:
-        return HTTPResponse(status=404, body=NO_SURPRISE)
+    if not single[1]:
+        return single[0]
+
     # valid
     type_surprise, json_frame = single
     stats.set_stat(type_surprise)  # update stats

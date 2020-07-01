@@ -19,7 +19,8 @@ class Stats:
             {
                 "chuck-norris-joke": self.DEFAULT_VALUE,
                 "kanye-quote": self.DEFAULT_VALUE,
-                "name-sum": self.DEFAULT_VALUE
+                "name-sum": self.DEFAULT_VALUE,
+                'animal in your first letter': self.DEFAULT_VALUE
             }
 
     def set_stat(self, type_of_surprise):

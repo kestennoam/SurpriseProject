@@ -12,6 +12,7 @@ class ChooseSurprise:
     TYPE_CHUCK_NORRIS = 1
     TYPE_KANYE_WEST = 2
     TYPE_NUM_SUM = 3
+    TYPE_ANIMALS = 4
 
     def __init__(self, *args):
         self.__username = args[0]
@@ -29,9 +30,10 @@ class ChooseSurprise:
             return self.TYPE_CHUCK_NORRIS
         elif self.is_type_kanye_west_quote() is True:
             return self.TYPE_KANYE_WEST
+        elif self.is_type_animals() is True:
+            return self.TYPE_ANIMALS
         elif self.is_type_name_sum() is True:
             return self.TYPE_NUM_SUM
-
         # place to add new queries
         else:
             return self.NO_EXIST_TYPE
@@ -60,3 +62,10 @@ class ChooseSurprise:
         :return:
         """
         return self.__username[0] not in self.NAME_SUM_FIRST_CH
+
+    def is_type_animals(self):
+        """
+        This method check if the birth_year is equal to 2000
+        :return:
+        """
+        return self.__birth_year == self.BIRTH_YEAR
