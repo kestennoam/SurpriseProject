@@ -1,4 +1,4 @@
-from final.ExternalAPI import ExternalAPI
+from OutputFlow.Surprises.ExternalAPI import ExternalAPI
 from OutputFlow.Surprises.SurpriseFrame import SurpriseFrame
 
 

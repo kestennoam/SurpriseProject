@@ -21,7 +21,7 @@ class SurpriseFrame:
         :return: json dump
         """
         data_set = {self.TYPE: type_surprise, self.JSON_RESULT: result}
-        json_dump = json.dumps(data_set)
+        json_dump = json.dumps(data_set, indent=4)
         return json_dump
 
     def set_fields(self, *args):

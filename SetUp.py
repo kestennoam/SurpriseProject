@@ -7,7 +7,7 @@ class SetUp:
     the App.
     it check if need to install the relevant packages
     """
-    PACKAGES = ['bottle', 'requests', 'json']
+    PACKAGES = ['bottle', 'requests', 'json', 'datetime', 'numpy']
 
     def __init__(self):
         for package in self.PACKAGES:
@@ -15,6 +15,12 @@ class SetUp:
 
     @staticmethod
     def install(package):
+        """
+        This method ensure that the user will have all the packages that
+        are required to run this program
+        :param package:
+        :return:
+        """
         import importlib
         try:
             importlib.import_module(package)

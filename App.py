@@ -1,7 +1,7 @@
-from bottle import route, run, HTTPResponse, request
+from bottle import route, run, request
 from OutputFlow.SingleSurprise import SingleSurprise
 from Stats import Stats
-from SetUp import *
+from Demographics import Demographics
 
 # --------------------- Macros-----------------------------------
 PORT = 3000
@@ -22,15 +22,15 @@ def surprise():
     and return a response depend on the input
     :return: json frame directly to the web
     """
-
-    single = SingleSurprise(dict(request.forms),
-                            dict(request.query.decode())).flow()
-    if not single[1]:  # check if the input is invalid
-        return single[0]
+    dict_queries = dict(request.query.decode())
+    res = SingleSurprise(dict(request.forms), dict_queries).flow()
+    if not res[1]:  # check if the input is invalid
+        return res[0]
 
     # valid
-    type_surprise, json_frame = single
+    type_surprise, json_frame = res
     stats.set_stat(type_surprise)  # update stats
+    demographics.update_stats(dict_queries)
     return json_frame
 
 
@@ -45,9 +45,20 @@ def stats():
     return stats.response_stats()
 
 
+@route("/api/demographics")
+def demographics():
+    """
+    This method ic responding to http get of /api/stats.
+    it call Stats class (that already created on main) and return json
+    frame that include all the stats.
+    :return:json frame
+    """
+    return demographics.response_demographics()
+
+
 # --------------------- Main -----------------------------------
 
 if __name__ == '__main__':
-    SetUp()
     stats = Stats()
+    demographics = Demographics()
     run(host=HOST, port=PORT)

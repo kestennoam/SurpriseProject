@@ -26,9 +26,9 @@ def random_string():
 class TestValidationInput():
 
     def __init__(self):
-        self.run_validationInput()
+        self.run_validation_input()
 
-    def run_validationInput(self):
+    def run_validation_input(self):
         self.test_num_of_params_valid()
         self.test_num_of_params_invalid()
         self.test_username_invalid()
