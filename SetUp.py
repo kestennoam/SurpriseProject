@@ -7,10 +7,13 @@ class SetUp:
     the App.
     it check if need to install the relevant packages
     """
-    PACKAGES = ['bottle', 'requests', 'json', 'datetime', 'numpy', 'pytest']
+    PACKAGES_3 = ['bottle', 'requests', 'json', 'datetime', 'pytest']
+    PACKAGES_2 = ['numpy']
 
     def __init__(self):
-        for package in self.PACKAGES:
+        for package in self.PACKAGES_3:
+            self.install(package)
+        for package in self.PACKAGES_2:
             self.install(package)
 
     @staticmethod
@@ -26,6 +29,7 @@ class SetUp:
             importlib.import_module(package)
         except ImportError:
             subprocess.call(['pip3', 'install', package])
+
 
 if __name__ == '__main__':
     SetUp()
