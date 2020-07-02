@@ -28,7 +28,7 @@ class SetUp:
         try:
             importlib.import_module(package)
         except ImportError:
-            subprocess.call(['sudo', 'pip3', 'install', package])
+            subprocess.call(['pip3', 'install', package])
 
 
 if __name__ == '__main__':
