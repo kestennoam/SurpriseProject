@@ -13,7 +13,7 @@ it is associated with:
             1.c) Surprise Module- num-sum- calculate the value of the username letters (a=1=A, b=2=B...)
             1.d) Surprise Module- Animals- Randomize an animal that the first char of it and the username are same
    ### 2) Stats
-      Dry stats on how many requests have been called (/api/stats)
+      Dry stats on how many requests have been called   b(/api/stats)
    ### 3) Demographics
       Calculations of stats as age of the users, their probably gender, percentiles etc... (api/demographics)
     
@@ -45,6 +45,19 @@ Navigate to the directory of SurpriseMe Projet-
    ~cd <path to the project directory>
 Run SetUp.py (will install all the relevant modules)
    ~python3 SetUp.py
+
+```
+Manually installation if SetUp wasn't worked:
+```
+Open Terminal
+Navigate to the directory of SurpriseMe Projet-
+    ~pip3 install bottle
+    ~pip3 install requests
+    ~pip3 install json
+    ~pip3 install datetime
+    ~pip3 install pytest
+    ~pip install numpy
+    
 
 ```
 
