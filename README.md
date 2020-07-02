@@ -37,7 +37,7 @@ python-3.8.0.exe InstallAllUsers=0 Include_launcher=0 Include_test=0SimpleInstal
 get-install python3 //linux
 ```
 
-Make sure pip3 is installed (only 3 version works yet)
+Note: Make sure pip3 is installed (if you have another version change make everything with pythonX and pipX (X is the version))
 
 Installing Python packages-
 
