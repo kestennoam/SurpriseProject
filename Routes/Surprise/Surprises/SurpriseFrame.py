@@ -7,7 +7,7 @@ class SurpriseFrame:
     it include the basic methods that we will need to create a surprise
     instance
     """
-    TYPE = "type"
+    TYPE_TITLE = "type"
     JSON_RESULT = "result"
 
     def __init__(self):
@@ -20,7 +20,7 @@ class SurpriseFrame:
         :param result: the instance that was returned from single iteration
         :return: json dump
         """
-        data_set = {self.TYPE: type_surprise, self.JSON_RESULT: result}
+        data_set = {self.TYPE_TITLE: type_surprise, self.JSON_RESULT: result}
         json_dump = json.dumps(data_set, indent=4)
         return json_dump
 
