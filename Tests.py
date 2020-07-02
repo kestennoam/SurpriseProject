@@ -5,6 +5,7 @@ import random
 import datetime
 
 CURRENT_YEAR = datetime.datetime.today().year
+OLDEST_YEAR = CURRENT_YEAR - 130
 DEFAULT_ITERATIONS = 1000
 NO_EXIST_TYPE = -1
 TYPE_CHUCK_NORRIS = 1
@@ -140,24 +141,23 @@ class TestValidationInput:
         4) not numeric
         :return:
         """
+        msg_failed = f"Year Not in range {OLDEST_YEAR}- {CURRENT_YEAR}"
         not_in_range = {'name': "test", 'birth_year': '2030'}
         in1 = ValidationInput(not_in_range)
-        assert not in1.validate_birth_year(), "Year Not in range 0- 2020"
+        assert not in1.validate_birth_year(), msg_failed
 
         negative_year = {'name': "test", 'birth_year': '-4'}
         in2 = ValidationInput(negative_year)
-        assert not in2.validate_birth_year(), \
-            f"Year Not in range 0- {CURRENT_YEAR}"
+        assert not in2.validate_birth_year(), msg_failed
 
         float_year = {'name': "test", 'birth_year': '2000.2'}
         in3 = ValidationInput(float_year)
-        assert not in3.validate_birth_year(), \
-            f"Year Not in range 0- {CURRENT_YEAR}"
+        assert not in3.validate_birth_year(), msg_failed
 
         not_numeric = {'name': "test", 'birth_year': 'aa'}
         in4 = ValidationInput(not_numeric)
         assert not in4.validate_birth_year(), \
-            f"Year Must be an integer 0-{CURRENT_YEAR}"
+            f"Year Must be an integer {OLDEST_YEAR}-{CURRENT_YEAR}"
         print("TEST PASSED- birth_year invalid")
 
     @staticmethod
@@ -167,11 +167,11 @@ class TestValidationInput:
         :return:
         """
         for i in range(DEFAULT_ITERATIONS):
-            year = str(random.randrange(0, CURRENT_YEAR + 1))
+            year = str(random.randrange(OLDEST_YEAR, CURRENT_YEAR + 1))
             not_in_range = {'name': "test", 'birth_year': year}
             in1 = ValidationInput(not_in_range)
             assert in1.validate_birth_year(), \
-                F"Year in range 0-{CURRENT_YEAR} is valid"
+                F"Year in range {OLDEST_YEAR}-{CURRENT_YEAR} is valid"
         print("TEST PASSED- birth_year valid")
 
 
@@ -203,7 +203,7 @@ class TestChooseSurprise:
         """
         for i in range(DEFAULT_ITERATIONS):
             username = random_string()
-            birth_year = random.randrange(1, BIRTH_YEAR_DEFAULT)
+            birth_year = random.randrange(OLDEST_YEAR, BIRTH_YEAR_DEFAULT)
             assert ChooseSurprise(username, birth_year).choose_type() \
                    == TYPE_CHUCK_NORRIS, "Should be Chuck Norris"
         print("TEST PASSED- Chuck Norris Valid")

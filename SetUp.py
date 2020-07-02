@@ -1,4 +1,5 @@
 import subprocess
+import sys
 
 
 class SetUp:
@@ -28,7 +29,8 @@ class SetUp:
         try:
             importlib.import_module(package)
         except ImportError:
-            subprocess.call(['pip3', 'install', package])
+            subprocess.call(
+                ['pip'+str(sys.version_info[0]), 'install', package])
 
 
 if __name__ == '__main__':

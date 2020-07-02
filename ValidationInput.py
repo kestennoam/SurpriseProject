@@ -10,8 +10,9 @@ class ValidationInput:
     Must note that at this moment we accept more fields than num_of_params
     """
     CURRENT_YEAR = datetime.datetime.today().year
+    OLDEST_YEAR = CURRENT_YEAR - 130
     NUM_OF_PARAMS = 2
-    RANGE_YEARS = range(0, CURRENT_YEAR + 1)
+    RANGE_YEARS = range(OLDEST_YEAR, CURRENT_YEAR + 1)
 
     def __init__(self, dict_params):
         self.__dict_params = dict_params
@@ -53,14 +54,16 @@ class ValidationInput:
         if 'name' not in self.__dict_params: return False
         num_of_spaces = 0
         for ch in self.__dict_params['name']:
-            if not self.is_english_char(ch): return False  # check english
+            if not self.is_english_char(ch):
+                return False  # check english
             if ch.isalpha():
                 continue
             elif ch.isspace() and num_of_spaces < 1:
                 num_of_spaces += 1
             else:
                 return False
-        if len(self.__dict_params['name']) == 0: return False
+        if len(self.__dict_params['name']) == 0:
+            return False
         return True
 
     @staticmethod

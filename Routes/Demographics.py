@@ -27,6 +27,7 @@ class Demographics:
     def __init__(self):
         self.__dic = {}
         self.__ages = {}
+        self.__names = []
         self.__all_results = []
         self.__genders = {'male': 0, 'female': 0}
         self.__percentiles = {
@@ -45,6 +46,21 @@ class Demographics:
         """
         self.update_age_dict(dic)
         self.update_gender(dic)
+
+    def response_demographics(self):
+        """
+        This method create a json frame of the response when the user send
+        get request with route of the demographics.
+        it pack together ages,gender and percentiles dictionaries
+        :return:
+        """
+        self.calc_percentiles()
+        self.count_gender()
+        data_frame = {self.AGES_TITLE: self.__ages,
+                      self.GENDERS_TITLE: self.__genders,
+                      self.PERCENTILES_TITLE: self.__percentiles}
+        json_dump = json.dumps(data_frame, indent=4)
+        return json_dump
 
     def update_age_dict(self, dic):
         """
@@ -78,29 +94,24 @@ class Demographics:
 
     def update_gender(self, dic):
         """
-        This method user external api class to infer which gender is the user
+        This method just add names to
         :param dic:
         :return:
         """
         if 'name' not in dic:
             return
-        first_name = dic['name'].split()[0]
-        parsed_url = self.URL_GENDER + first_name
-        gender = ExternalAPI('gender', parsed_url).read_json()
-        if gender == self.ERROR_CONNECTION:
-            return
-        self.__genders[gender] += 1
+        self.__names.append(dic['name'].split()[0])
 
-    def response_demographics(self):
+    def count_gender(self):
         """
-        This method create a json frame of the response when the user send
-        get request with route of the demographics.
-        it pack together ages,gender and percentiles dictionaries
+        This method user external api class to infer which gender is the user
         :return:
         """
-        self.calc_percentiles()
-        data_frame = {self.AGES_TITLE: self.__ages,
-                      self.GENDERS_TITLE: self.__genders,
-                      self.PERCENTILES_TITLE: self.__percentiles}
-        json_dump = json.dumps(data_frame, indent=4)
-        return json_dump
+
+        for name in self.__names:
+            parsed_url = self.URL_GENDER + name
+            gender = ExternalAPI('gender', parsed_url).read_json()
+            if gender == self.ERROR_CONNECTION:
+                return
+            self.__genders[gender] += 1
+        self.__names = []
