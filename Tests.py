@@ -34,9 +34,6 @@ class TestValidationInput:
     it check a lot of sanity and edge cases of each function.
     """
 
-    def __init__(self):
-        self.run_validation_input()
-
     def run_validation_input(self):
         """
         this method run all the tests of the class
@@ -181,9 +178,6 @@ class TestChooseSurprise:
     of every possible option
     """
 
-    def __init__(self):
-        self.run_tests()
-
     def run_tests(self):
         """
         This method run all the tests
@@ -258,6 +252,6 @@ class TestChooseSurprise:
 
 
 if __name__ == '__main__':
-    validation_input = TestValidationInput()
-    TestChooseSurprise()
+    TestValidationInput().run_validation_input()
+    TestChooseSurprise().run_tests()
     print("ALL TESTS PASSED")

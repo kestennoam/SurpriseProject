@@ -27,6 +27,7 @@ class Demographics:
     def __init__(self):
         self.__dic = {}
         self.__ages = {}
+        self.__cache_genders = {}
         self.__names = []
         self.__all_results = []
         self.__genders = {'male': 0, 'female': 0}
@@ -102,6 +103,17 @@ class Demographics:
             return
         self.__names.append(dic['name'].split()[0])
 
+    def cache_genders(self, name):
+        if name in self.__cache_genders:
+            return self.__cache_genders[name]
+        else:
+            parsed_url = self.URL_GENDER + name
+            gender = ExternalAPI('gender', parsed_url).read_json()
+            if gender == self.ERROR_CONNECTION:
+                return self.ERROR_CONNECTION
+            self.__cache_genders[name] = gender
+            return gender
+
     def count_gender(self):
         """
         This method user external api class to infer which gender is the user
@@ -109,9 +121,6 @@ class Demographics:
         """
 
         for name in self.__names:
-            parsed_url = self.URL_GENDER + name
-            gender = ExternalAPI('gender', parsed_url).read_json()
-            if gender == self.ERROR_CONNECTION:
-                return
+            gender = self.cache_genders(name)
             self.__genders[gender] += 1
         self.__names = []
