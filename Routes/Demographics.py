@@ -28,9 +28,8 @@ class Demographics:
         self.__dic = {}
         self.__ages = {}
         self.__cache_genders = {}
-        self.__names = []
         self.__all_results = []
-        self.__genders = {'male': 0, 'female': 0}
+        self.__genders = {'male': 0, 'female': 0, 'unknown': 0}
         self.__percentiles = {
             'P95': 0,
             'P90': 0,
@@ -56,7 +55,6 @@ class Demographics:
         :return:
         """
         self.calc_percentiles()
-        self.count_gender()
         data_frame = {self.AGES_TITLE: self.__ages,
                       self.GENDERS_TITLE: self.__genders,
                       self.PERCENTILES_TITLE: self.__percentiles}
@@ -101,9 +99,19 @@ class Demographics:
         """
         if 'name' not in dic:
             return
-        self.__names.append(dic['name'].split()[0])
+        gender = self.cache_genders(dic['name'].split()[0])
+        if gender == self.ERROR_CONNECTION:
+            return self.ERROR_CONNECTION
+        self.__genders[gender] += 1
+        return True
 
     def cache_genders(self, name):
+        """
+        This method is cache for requests to API of recognize gender.
+        check if already exists
+        :param name: first name
+        :return:
+        """
         if name in self.__cache_genders:
             return self.__cache_genders[name]
         else:
@@ -111,16 +119,8 @@ class Demographics:
             gender = ExternalAPI('gender', parsed_url).read_json()
             if gender == self.ERROR_CONNECTION:
                 return self.ERROR_CONNECTION
+            # Api didn't recognize which gender
+            if not gender:
+                gender = 'unknown'
             self.__cache_genders[name] = gender
             return gender
-
-    def count_gender(self):
-        """
-        This method user external api class to infer which gender is the user
-        :return:
-        """
-
-        for name in self.__names:
-            gender = self.cache_genders(name)
-            self.__genders[gender] += 1
-        self.__names = []
